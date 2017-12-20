@@ -1,20 +1,29 @@
 import path from 'path';
 import webpack from 'webpack';
 
-
 export default {
   devtool: 'eval-source-map',
-  entry: path.join(__dirname, '/client/index.js'),
+  entry: [
+    'react-hot-loader/patch',
+    'webpack/hot/only-dev-server', // "only" prevents reload on syntax errors/
+    'webpack-hot-middleware/client',
+    path.join(__dirname, '/client/index.js')
+  ],
   output: {
     path: path.resolve(__dirname, '/dist'),
+    publicPath: '/',
     filename: 'bundle.js'
-    },
+  },
+  plugins: [
+      new webpack.NoEmitOnErrorsPlugin(),
+      new webpack.HotModuleReplacementPlugin()
+    ],
   module:{
     loaders: [
       {
         test: /\.(js|jsx)$/,
         include: path.join(__dirname, 'client'),
-        loaders: ['babel-loader'],
+        loaders: ['react-hot-loader/webpack','babel-loader'],
         exclude: /node_modules/
       }
     ]
