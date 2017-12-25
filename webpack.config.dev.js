@@ -6,7 +6,7 @@ export default {
   entry: [
     'react-hot-loader/patch',
     'webpack/hot/only-dev-server', // "only" prevents reload on syntax errors/
-    'webpack-hot-middleware/client',
+    'webpack-hot-middleware/client?quiet=true',
     path.join(__dirname, '/client/index.js')
   ],
   output: {
@@ -31,4 +31,4 @@ export default {
   resolve: {
     extensions: ['.js', '.jsx']
   }
-}
+};
